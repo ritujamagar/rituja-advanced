@@ -1,0 +1,130 @@
+import React from 'react';
+import './UserCard.css';
+import Form from './Form'
+
+import {Card,Icon,Col,Modal,Button} from 'antd';
+
+class UserCard extends React.Component{
+    
+    state={theme:'',data:[],visible: false};
+
+    handleClick=()=>{
+        this.state.theme=== '' ? this.setState({theme:'filled'}): this.setState({theme:''});
+    }
+
+    showModal = () => {
+        this.setState({
+          visible: true,
+        });
+      };
+    
+      handleOk = e => {
+        console.log(e);
+        this.setState({
+          visible: false,
+        });
+      };
+    
+      handleCancel = e => {
+        console.log(e);
+        this.setState({
+          visible: false,
+        });
+      };
+    
+
+
+   
+        
+    
+
+    render(){
+        const imagesrc=`https://avatars.dicebear.com/v2/avataaars/${this.props.data.username}.svg?options[mood][]=happy`;
+        return(
+            <div>
+            <Col  xs={24} sm={24}  md={12} lg= {8} xl={6} >
+            <Card className="ant-card"
+            cover={ 
+              <img alt="example" src={imagesrc} />
+            }
+            actions={[<Icon type="heart" theme={this.state.theme} style={{fontSize:"20px", color:"#ff0000"}} 
+            onClick={this.handleClick}/>, 
+            <Icon type="edit" style={{fontSize:"20px"}} onClick={this.showModal}/>, 
+            <Icon type="delete" theme="filled" style={{fontSize:"20px"}} 
+            onClick={()=>this.props.item(this.props.e)}/>]}
+          >
+          <div>
+              <h3>{this.props.data.name}</h3>
+              <div className="content">
+                  <Icon type="mail" style={{fontSize:"18px", marginRight:"10px"}}/> {this.props.data.email}
+              </div>
+              <div className="content">
+                  <Icon type="phone" style={{fontSize:"18px", marginRight:"10px"}}/> {this.props.data.phone}
+              </div>
+              <div className="content">
+                  <Icon type="global" style={{fontSize:"18px", marginRight:"10px"}}/> http://{this.props.data.website}
+              </div>
+          </div>
+          </Card>
+       
+        </Col>
+        <Modal
+          title="Basic Modal"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <Form name={this.props.data.name} email={this.props.data.email} website={this.props.data.website} phone={this.props.data.phone}/>
+        </Modal>
+        </div>
+        
+          
+        );
+
+        
+        {/* <div className="ant-col ant-col-xs-24 ant-col-sm-24 ant-col-md-8 ant-col-lg-8 ant-col-xl-6">
+                    <div className="ant-card ant-card-bordered" style={{margin:"15px"}}>
+                         <div className="ant-card-cover">
+                             <div className="cardHeadImage">
+                                 <img src={imagesrc}></img>
+                         </div>
+                             <div className="ant-card-body">
+                                 <h3>{this.props.data.name}</h3>
+                             <div style={{display:'flex', flexDirection:'row'}}>
+                                 <Icon type="mail"/>
+                                 <p style={{marginLeft:"10px"}}>{this.props.data.email}</p>
+
+                             </div>
+                             <div style={{display:'flex', flexDirection:'row'}}>
+                                 <Icon type="phone"/>
+                                 <p style={{marginLeft:"10px"}}>{this.props.data.phone}</p>
+
+                             </div>
+                             <div style={{display:'flex', flexDirection:'row'}}>
+                                 <Icon type="global"/>
+                                 <p style={{marginLeft:"10px"}}>{this.props.data.website}</p>
+
+                             </div>
+                            <ul className="ant-card-actions">
+                                 <li>
+                                 <span>
+                //                     <button>
+                //                         <Icon type="heart"/>
+                //                     </button>
+                //                 </span></li>
+                //                 <li></li>
+                //                 <li></li>
+                //             </ul>
+                //             </div>
+                //         </div>
+                //         </div>
+                //         </div> */}
+                    
+                   
+            
+
+    
+    }
+}
+
+export default UserCard;

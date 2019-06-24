@@ -1,0 +1,16 @@
+
+@import '~antd/dist/antd.css';
+img{
+    width:200px; 
+    height:200px;
+}
+
+.ant-card{
+    margin: 15px;
+}
+
+.content{
+    font-size: 14px;
+    margin-bottom: 5px;
+    
+}
